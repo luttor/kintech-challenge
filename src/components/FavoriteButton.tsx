@@ -4,14 +4,14 @@ import { Show } from '@/interfaces/shows'
 import { Button } from '@nextui-org/react'
 import { IconHeart, IconHeartFilled } from '@tabler/icons-react'
 import { useState } from 'react'
-import { Toaster, toast } from 'sonner'
+import { toast } from 'sonner'
 
 interface Props {
     show: Show
 }
 
 const FavoriteButton = ({ show }: Props) => {
-    const data = localStorage.getItem('favorites');
+    const data = localStorage.getItem('favorites') || [];
     let favorites: Show[] = JSON.parse(data as string) as Show[] || [];
     const index = favorites?.findIndex((item) => item.id === show.id);
 

@@ -2,17 +2,15 @@
 
 import { Show } from "@/interfaces/shows";
 import List from '@/components/ShowList';
-import { Toaster } from "sonner";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [favorites, setFavorites] = useState<Show[]>([] as Show[]);
 
-  const data = localStorage.getItem('favorites');
-  let favorites: Show[] = JSON.parse(data as string) as Show[] || [];
+  useEffect(() => {
+    const data = window.localStorage.getItem('favorites');
+    setFavorites(JSON.parse(data as string) as Show[] || []);
+  }, [])
 
-  return (
-    <>
-      
-      <List data={favorites} />
-    </>
-  )
+  return <List data={favorites} />
 }
